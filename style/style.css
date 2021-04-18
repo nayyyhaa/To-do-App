@@ -66,5 +66,6 @@ li{
     text-overflow: clip;
     width: 60%;
     padding: 0.5rem;
+    word-break: break-word;
 }
 
