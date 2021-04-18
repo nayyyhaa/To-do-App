@@ -28,9 +28,12 @@ header, form{
 }
 main{
     background: linear-gradient(120deg, rgb(255,255,255,0.8),rgb(255,255,255,0.4));
+    min-height:60vh;
     height: 80%;
     width: 60%;
     border-radius: 1rem;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
 }
 form .todo-input, .todo-submit{
     padding: 0.5rem;
