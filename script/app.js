@@ -4,15 +4,46 @@ let todoSubmit = document.querySelector(".todo-submit");
 let todoList = document.querySelector(".todo-list");
 
 //Event Listeners
-todoSubmit.addEventListener("click",addTodo);
+todoSubmit.addEventListener("click",addTodoHandler);
+todoList.addEventListener("click",deleteCheckHandler);
 
 //Functions
-function addTodo(event){
+function addTodoHandler(event){
     //prevent form from submitting
     event.preventDefault();
     let inputValue = todoInput.value;
+    if(inputValue!=''){
+        addTodo(inputValue);
+    }
+}
+
+function addTodo(inputValue){
+    let div=document.createElement("div");
     let li=document.createElement("li");
     li.appendChild(document.createTextNode(inputValue));
-    todoList.appendChild(li)
+    li.innerHTML=`  
+                    <span class="todo-item">${inputValue}</span>
+                    <button class="todo-delete"><i class="fa fa-trash-o"></i></button>
+                    <button class="todo-check"><i class="fa fa-check-circle"></i></button>
+                `
+    div.appendChild(li);
+    div.classList.add("todo");
+    todoList.appendChild(div);
     todoInput.value="";
+}
+
+function deleteCheckHandler(e){
+    //getting clicked target 
+    let item = e.target; 
+    if(item.classList[0]==="todo-delete"){
+        //whole <li>
+        let todo=e.target.parentElement;
+        todo.remove();
+    }
+    if(item.classList[0]==="todo-check"){
+        //whole <li>
+        let todo=e.target.parentElement;
+        todo.classList.add("slash");
+    }
+
 }

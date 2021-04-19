@@ -30,7 +30,7 @@ main{
     background: linear-gradient(120deg, rgb(255,255,255,0.8),rgb(255,255,255,0.4));
     min-height:60vh;
     height: 80%;
-    width: 60%;
+    width: 50%;
     border-radius: 1rem;
     padding-bottom: 2rem;
     margin-bottom: 2rem;
@@ -55,20 +55,120 @@ form .todo-submit:hover{
     color: white;
 }
 .todo-list{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+    margin-left: 3rem;
 }
 li{
-    list-style: none;
     background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    width: 80%;
+    text-overflow: clip;
+    word-break: break-word;
+    border-radius: 1rem 0rem 0rem 1rem;
+    padding: 1rem;
+    position: relative;
+}
+li .todo-item, .todo-delete, .todo-check {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+}
+.todo-item{
+    flex:1;
+    list-style: none;
     color: black;
-    margin: 0.5rem;
-    border-radius: 1rem;
     text-overflow: clip;
     width: 60%;
     padding: 0.5rem;
-    word-break: break-word;
+    word-wrap: break-word;
 }
+.todo-delete{
+    position: absolute;
+    right: -5.5%;
+    height: 100%;
+    background: white;
+    color: rgb(243, 77, 77);
+    transition: all 0.3s ease;
+    min-height: 100%;
+}
+.todo-delete:hover{
+    background: rgb(243, 77, 77);
+    color: white;
+}
+.todo-check{
+    position: absolute;
+    right: -10.5%;
+    height: 100%;
+    border-radius: 0rem 1rem 1rem 0rem;
+    background: white;
+    color: rgb(91, 243, 77); 
+    transition: all 0.3s ease;
+}
+.todo-check:hover{
+    background: rgb(91, 243, 77);
+    color: white;
+}
+
+/* pointer events none */
+.fa-trash-o, .fa-check-circle{
+    pointer-events: none;
+}
+
+.slash{
+    text-decoration: line-through;
+    color: black;
+    opacity: 0.5;
+}
+@media screen and (max-width:1000px){
+    main{
+        width: 70%;
+    }
+    .todo-list{
+        margin: 0rem 2rem;
+    }
+    .todo-delete{
+        position: absolute;
+        right:-9%;
+    }
+    .todo-check{
+        position: absolute;
+        right:-19%;
+    }
+}
+@media screen and (max-width:626px){
+    main{
+        width: 80%;
+    }
+    .todo-delete{
+        position: absolute;
+        right:-9%;
+    }
+    .todo-check{
+        position: absolute;
+        right:-21%;
+    }
+
+
+}
+@media screen and (max-width:400px){
+    main{
+        width: 80%;
+    }
+    .todo-list{
+        margin: 0rem 2rem 0rem 0rem;
+    }
+    .todo-delete{
+        position: absolute;
+        right:-10%;
+    }
+    .todo-check{
+        position: absolute;
+        right:-26%;
+    }
+
+
+}
+
 
