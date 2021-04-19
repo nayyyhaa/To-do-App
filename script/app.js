@@ -12,7 +12,13 @@ function addTodoHandler(event){
     //prevent form from submitting
     event.preventDefault();
     let inputValue = todoInput.value;
-    if(inputValue!=''){
+    if (inputValue === '') {
+        alert("You must write something!");
+    }
+    else{
+        if(inputValue.includes('<ul>')){
+        inputValue=inputValue.replace(/<ul>/g,"< ul >");
+        }
         addTodo(inputValue);
     }
 }
