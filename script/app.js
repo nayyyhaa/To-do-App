@@ -2,6 +2,7 @@
 let todoInput = document.querySelector(".todo-input"); //alt + shift + down for multiple copies
 let todoSubmit = document.querySelector(".todo-submit");
 let todoList = document.querySelector(".todo-list");
+let checkflag = false;
 
 //Event Listeners
 todoSubmit.addEventListener("click",addTodoHandler);
@@ -40,7 +41,7 @@ function addTodo(inputValue){
 
 function deleteCheckHandler(e){
     //getting clicked target 
-    let item = e.target; 
+    let item = e.target;
     if(item.classList[0]==="todo-delete"){
         //whole <li>
         let todo=e.target.parentElement;
@@ -49,7 +50,14 @@ function deleteCheckHandler(e){
     if(item.classList[0]==="todo-check"){
         //whole <li>
         let todo=e.target.parentElement;
-        todo.classList.add("slash");
-    }
+        if(!checkflag){
+            todo.classList.add("slash");
+            checkflag=true;
+        } else {
+            todo.classList.remove("slash");
+            checkflag=false;    
+        }
+
+    } 
 
 }
