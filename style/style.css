@@ -36,13 +36,14 @@ main{
     margin-bottom: 2rem;
 }
 form .todo-input, .todo-submit{
-    padding: 0.5rem;
+    padding: 0.75rem;
     font-size: 1rem;
     border: none;
     background: white;
 }
 form .todo-input{
     border-radius: 1rem 0rem 0rem 1rem;
+    width: 60%
 }
 form .todo-submit{
     border-radius: 0rem 1rem 1rem 0rem;
@@ -57,7 +58,7 @@ form .todo-submit:hover{
 .todo-list{
     margin-left: 3rem;
 }
-li{
+div li{
     background: white;
     display: flex;
     align-items: center;
@@ -67,26 +68,27 @@ li{
     text-overflow: clip;
     word-break: break-word;
     border-radius: 1rem 0rem 0rem 1rem;
-    padding: 1rem;
+    padding: 0.5rem 2rem 0.5rem 1rem;
     position: relative;
 }
-li .todo-item, .todo-delete, .todo-check {
+div .todo-item, .todo-delete, .todo-check {
     padding: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     border: none;
 }
-.todo-item{
+div .todo-item{
     flex:1;
     list-style: none;
     color: black;
     text-overflow: clip;
     width: 60%;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     word-wrap: break-word;
+    font-size: 1rem;
 }
-.todo-delete{
+div .todo-delete{
     position: absolute;
-    right: -5.5%;
+    right: 0;
     height: 100%;
     background: white;
     color: rgb(243, 77, 77);
@@ -97,9 +99,9 @@ li .todo-item, .todo-delete, .todo-check {
     background: rgb(243, 77, 77);
     color: white;
 }
-.todo-check{
+div .todo-check{
     position: absolute;
-    right: -10.5%;
+    right: -34.86px;
     height: 100%;
     border-radius: 0rem 1rem 1rem 0rem;
     background: white;
@@ -121,34 +123,34 @@ li .todo-item, .todo-delete, .todo-check {
     color: black;
     opacity: 0.5;
 }
-@media screen and (max-width:1000px){
+ @media screen and (max-width:1000px){
     main{
         width: 70%;
     }
     .todo-list{
         margin: 0rem 2rem;
-    }
-    .todo-delete{
+     }
+    /*.todo-delete{
         position: absolute;
         right:-9%;
     }
     .todo-check{
         position: absolute;
         right:-19%;
-    }
+    } */
 }
 @media screen and (max-width:626px){
     main{
         width: 80%;
     }
-    .todo-delete{
+    /* .todo-delete{
         position: absolute;
         right:-9%;
     }
     .todo-check{
         position: absolute;
         right:-21%;
-    }
+    } */
 
 
 }
@@ -159,16 +161,16 @@ li .todo-item, .todo-delete, .todo-check {
     .todo-list{
         margin: 0rem 2rem 0rem 0rem;
     }
-    .todo-delete{
+    /* .todo-delete{
         position: absolute;
         right:-10%;
     }
     .todo-check{
         position: absolute;
         right:-26%;
-    }
+    } */
 
 
-}
+} 
 
 
