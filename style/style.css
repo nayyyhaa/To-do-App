@@ -39,6 +39,7 @@ form {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    margin-top: 1rem;
 }
 form .todo-input, .todo-submit{
     padding: 0.75rem;
@@ -60,6 +61,15 @@ form .todo-submit:hover{
     background: var(--secondary-colour);
     color: white;
 }
+
+.filter-todos{
+    margin: 1rem;
+    background: var(--secondary-colour);
+    color: white;
+    padding: 0.25rem;
+    cursor: pointer;
+}
+
 .todo-list{
     margin-left: 3rem;
 }

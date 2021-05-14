@@ -8,6 +8,7 @@ let filterTodos = document.querySelector(".filter-todos")
 todoSubmit.addEventListener("click",addTodoHandler);
 todoList.addEventListener("click",deleteCheckHandler);
 filterTodos.addEventListener("click",filterTodosHandler);
+document.addEventListener("DOMContentLoaded",getTodosHandler);
 
 //Functions
 function addTodoHandler(event){
@@ -27,6 +28,7 @@ function addTodoHandler(event){
 
 function addTodo(inputValue){
     //Create todo div
+    saveLocalTodos(inputValue);
     const div = document.createElement("div");
     let li=document.createElement("li");
     li.appendChild(document.createTextNode(inputValue));
@@ -50,6 +52,7 @@ function deleteCheckHandler(e){
     if(item.classList[0]==="todo-delete"){
         let todo = item.parentElement;
         todo.classList.add("removeTransition");
+        removeLocalTodos(todo);
         todo.addEventListener("transitionend", e => {
             todo.remove();
         });
@@ -92,4 +95,46 @@ function filterTodosHandler(e){
                 }break;
         }
     })
+}
+
+function checkLocalStorage(){
+    let todosInStorage;
+    if(localStorage.getItem("todosInStorage") === null){
+        todosInStorage = [];
+    } else {
+        todosInStorage = JSON.parse(localStorage.getItem("todosInStorage"));
+    }
+    return todosInStorage;
+}
+
+function saveLocalTodos(inputValue){
+    let todosInStorage = checkLocalStorage();
+    todosInStorage.push(inputValue);
+    localStorage.setItem("todosInStorage", JSON.stringify(todosInStorage));
+}
+
+function removeLocalTodos(todo){
+    let todosInStorage = checkLocalStorage();
+    // console.log(todo.children); -item,check,delete
+    const todoIndex = todo.children[0].innerText;
+    todosInStorage.splice(todoIndex, 1);
+    localStorage.setItem("todosInStorage", JSON.stringify(todosInStorage));
+}
+
+function getTodosHandler(){
+    let todosInStorage = checkLocalStorage();
+    todosInStorage.forEach(function(todo) {
+        const div = document.createElement("div");
+        let li=document.createElement("li");
+        li.appendChild(document.createTextNode(todo));
+        li.innerHTML=`  
+                        <span class="todo-item">${todo}</span>
+                        <button class="todo-delete"><i class="fa fa-trash-o"></i></button>
+                        <button class="todo-check"><i class="fa fa-check-circle"></i></button>
+                    `
+        div.classList.add("todo");
+        div.appendChild(li)
+        todoList.appendChild(div);
+    })
+
 }
