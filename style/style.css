@@ -35,6 +35,11 @@ main{
     padding-bottom: 2rem;
     margin-bottom: 2rem;
 }
+form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
 form .todo-input, .todo-submit{
     padding: 0.75rem;
     font-size: 1rem;
