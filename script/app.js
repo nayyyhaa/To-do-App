@@ -7,7 +7,7 @@ let filterTodos = document.querySelector(".filter-todos")
 //Event Listeners
 todoSubmit.addEventListener("click",addTodoHandler);
 todoList.addEventListener("click",deleteCheckHandler);
-filterTodos.addEventListener("change",() => {
+filterTodos.addEventListener("click",() => {
     if(filterTodos.value)
         filterTodosHandler(filterTodos.value);
 });
