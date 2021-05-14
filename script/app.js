@@ -11,6 +11,10 @@ filterTodos.addEventListener("click",() => {
     if(filterTodos.value)
         filterTodosHandler(filterTodos.value);
 });
+filterTodos.addEventListener("change",() => {
+    if(filterTodos.value)
+        filterTodosHandler(filterTodos.value);
+});
 document.addEventListener("DOMContentLoaded",getTodosHandler);
 
 //Functions
