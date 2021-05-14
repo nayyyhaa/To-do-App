@@ -7,7 +7,10 @@ let filterTodos = document.querySelector(".filter-todos")
 //Event Listeners
 todoSubmit.addEventListener("click",addTodoHandler);
 todoList.addEventListener("click",deleteCheckHandler);
-filterTodos.addEventListener("click",filterTodosHandler);
+filterTodos.addEventListener("change",() => {
+    if(filterTodos.value)
+        filterTodosHandler(filterTodos.value);
+});
 document.addEventListener("DOMContentLoaded",getTodosHandler);
 
 //Functions
@@ -67,9 +70,9 @@ function deleteCheckHandler(e){
     }
 }
 
-function filterTodosHandler(e){
-    //option value - all, completed
-    let optionValue = e.target.value;
+function filterTodosHandler(optionValue){
+    // //option value - all, completed
+    // let optionValue = e.target.value;
     let todos = Array.from(document.querySelectorAll('.todo-list>div'));
     //console.log(todos) //div's array
     todos.forEach(todoss => {
