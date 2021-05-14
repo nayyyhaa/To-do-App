@@ -16,15 +16,14 @@ function addTodoHandler(event){
         alert("You must write something!");
     }
     else{
-        if(inputValue.includes('<ul>')){
-        inputValue=inputValue.replace(/<ul>/g,"< ul >");
+        if(inputValue.includes('<')){
+        inputValue=inputValue.replace(/</g,"< ");
         }
         addTodo(inputValue);
     }
 }
 
 function addTodo(inputValue){
-    let div=document.createElement("div");
     let li=document.createElement("li");
     li.appendChild(document.createTextNode(inputValue));
     li.innerHTML=`  
@@ -32,19 +31,22 @@ function addTodo(inputValue){
                     <button class="todo-delete"><i class="fa fa-trash-o"></i></button>
                     <button class="todo-check"><i class="fa fa-check-circle"></i></button>
                 `
-    div.appendChild(li);
-    div.classList.add("todo");
-    todoList.appendChild(div);
+    todoList.appendChild(li);
     todoInput.value="";
 }
 
 function deleteCheckHandler(e){
     //getting clicked target 
     let item = e.target;
+    //console.log(item); - whatever clicked(button,div)
     //whole <li>
     let todo=e.target.parentElement;
     if(item.classList[0]==="todo-delete"){
-        todo.remove();
+        let todo = item.parentElement;
+        todo.classList.add("removeTransition");
+        todo.addEventListener("transitionend", e => {
+            todo.remove();
+        });
     }
     if(item.classList[0]==="todo-check"){
         console.log(todo.classList[0])

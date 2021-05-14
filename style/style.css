@@ -58,7 +58,7 @@ form .todo-submit:hover{
 .todo-list{
     margin-left: 3rem;
 }
-div li{
+li{
     background: white;
     display: flex;
     align-items: center;
@@ -70,13 +70,14 @@ div li{
     border-radius: 1rem 0rem 0rem 1rem;
     padding: 0.5rem 2rem 0.5rem 1rem;
     position: relative;
+    transition: all 0.5s ease;
 }
-div .todo-item, .todo-delete, .todo-check {
+.todo-item, .todo-delete, .todo-check {
     padding: 0.5rem;
     font-size: 1.5rem;
     border: none;
 }
-div .todo-item{
+.todo-item{
     flex:1;
     list-style: none;
     color: black;
@@ -86,7 +87,7 @@ div .todo-item{
     word-wrap: break-word;
     font-size: 1rem;
 }
-div .todo-delete{
+.todo-delete{
     position: absolute;
     right: 0;
     height: 100%;
@@ -99,7 +100,7 @@ div .todo-delete{
     background: rgb(243, 77, 77);
     color: white;
 }
-div .todo-check{
+.todo-check{
     position: absolute;
     right: -34.86px;
     height: 100%;
@@ -112,7 +113,10 @@ div .todo-check{
     background: rgb(91, 243, 77);
     color: white;
 }
-
+.removeTransition{
+    transform: translateX(20rem);
+    opacity: 0.5;
+}
 /* pointer events none */
 .fa-trash-o, .fa-check-circle{
     pointer-events: none;
