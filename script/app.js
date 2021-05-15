@@ -125,11 +125,6 @@ function checkLocalStorage(){
         todosInStorage = [];
     } else {
         todosInStorage = JSON.parse(localStorage.getItem("todosInStorage"));
-        let firstObj = todosInStorage[0];
-        if(Object.keys(firstObj).length===0){
-            todosInStorage.splice(1,1);
-            localStorage.setItem("todosInStorage", JSON.stringify(todosInStorage));
-        }
     }
     return todosInStorage;
 }
