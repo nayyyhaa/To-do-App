@@ -121,7 +121,7 @@ function filterTodosHandler(optionValue){
 
 function checkLocalStorage(){
     let todosInStorage;
-    if(localStorage.getItem("todosInStorage") === null || JSON.parse(localStorage.getItem("todosInStorage")) === {}){
+    if(localStorage.getItem("todosInStorage") === null || localStorage.getItem("todosInStorage") === [{}]){
         todosInStorage = [];
     } else {
         todosInStorage = JSON.parse(localStorage.getItem("todosInStorage"));
