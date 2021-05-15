@@ -121,10 +121,11 @@ function filterTodosHandler(optionValue){
 
 function checkLocalStorage(){
     let todosInStorage;
-    if(localStorage.getItem("todosInStorage") === null || JSON.parse(localStorage.getItem("todosInStorage")) === [{}]){
+    if(localStorage.getItem("todosInStorage") === null){
         todosInStorage = [];
     } else {
         todosInStorage = JSON.parse(localStorage.getItem("todosInStorage"));
+        console.log(todosInStorage[0]);
     }
     return todosInStorage;
 }
