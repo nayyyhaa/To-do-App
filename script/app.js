@@ -10,10 +10,12 @@ todoList.addEventListener("click",deleteCheckHandler);
 filterTodos.addEventListener("click",() => {
     if(filterTodos.value)
         filterTodosHandler(filterTodos.value);
+    console.log("cl"+filterTodos.value);
 });
 filterTodos.addEventListener("change",() => {
     if(filterTodos.value)
         filterTodosHandler(filterTodos.value);
+    console.log("ch"+filterTodos.value);
 });
 document.addEventListener("DOMContentLoaded",getTodosHandler);
 
@@ -61,7 +63,7 @@ function deleteCheckHandler(e){
         todo.classList.add("removeTransition");
         removeLocalTodos(todo);
         todo.addEventListener("transitionend", e => {
-            todo.remove();
+            todo.parentElement.remove();
         });
     }
     if(item.classList[0]==="todo-check"){
