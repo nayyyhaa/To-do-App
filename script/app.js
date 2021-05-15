@@ -126,7 +126,7 @@ function checkLocalStorage(){
     } else {
         todosInStorage = JSON.parse(localStorage.getItem("todosInStorage"));
         let firstObj = todosInStorage[0];
-        if(Object.keys(obj).length===0){
+        if(Object.keys(firstObj).length===0){
             todosInStorage.splice(1,1);
         }
     }
