@@ -2,7 +2,8 @@
 let todoInput = document.querySelector(".todo-input"); //alt + shift + down for multiple copies
 let todoSubmit = document.querySelector(".todo-submit");
 let todoList = document.querySelector(".todo-list");
-let filterTodos = document.querySelector(".filter-todos")
+let filterTodos = document.querySelector(".filter-todos");
+let todoSave =[];
 
 //Event Listeners
 todoSubmit.addEventListener("click",addTodoHandler);
@@ -10,12 +11,10 @@ todoList.addEventListener("click",deleteCheckHandler);
 filterTodos.addEventListener("click",() => {
     if(filterTodos.value)
         filterTodosHandler(filterTodos.value);
-    console.log("cl"+filterTodos.value);
 });
 filterTodos.addEventListener("change",() => {
     if(filterTodos.value)
         filterTodosHandler(filterTodos.value);
-    console.log("ch"+filterTodos.value);
 });
 document.addEventListener("DOMContentLoaded",getTodosHandler);
 
@@ -37,7 +36,8 @@ function addTodoHandler(event){
 
 function addTodo(inputValue){
     //Create todo div
-    saveLocalTodos(inputValue);
+    saveLocalTodos(inputValue,false);
+    todoSave.push({text: inputValue, checked: false});
     const div = document.createElement("div");
     let li=document.createElement("li");
     li.appendChild(document.createTextNode(inputValue));
@@ -58,6 +58,8 @@ function deleteCheckHandler(e){
     //console.log(item); - whatever clicked(button,li)
     //whole <li>
     let todo=e.target.parentElement;
+    let selectedTodo= todo.querySelector("span").innerText;
+    let todosInStorage = checkLocalStorage();
     if(item.classList[0]==="todo-delete"){
         let todo = item.parentElement;
         todo.classList.add("removeTransition");
@@ -67,12 +69,23 @@ function deleteCheckHandler(e){
         });
     }
     if(item.classList[0]==="todo-check"){
-        console.log(todo.classList[0])
-        if(todo.classList[0]==="slash"){
-            todo.classList.remove("slash");
-        } else {
-        todo.classList.add("slash");
-        }
+        todosInStorage.forEach(todoInArray => {
+            if(selectedTodo === todoInArray.text){
+                    if(todo.classList[0]==="slash" && todoInArray.checked === true){ 
+                    todo.classList.remove("slash");
+                } else {
+                todo.classList.add("slash");
+                }
+            }
+                
+        })
+        todosInStorage.forEach(todoInArray => {
+                if(selectedTodo === todoInArray.text){
+                    todoInArray.checked = !todoInArray.checked;
+                }
+            clearLocalTodo(todoInArray.text);
+            saveLocalTodos(todoInArray.text,todoInArray.checked);
+        })
     }
 }
 
@@ -116,9 +129,10 @@ function checkLocalStorage(){
     return todosInStorage;
 }
 
-function saveLocalTodos(inputValue){
+function saveLocalTodos(inputValue,checkedValue){
+    let todoObj = {text: inputValue,checked: checkedValue};
     let todosInStorage = checkLocalStorage();
-    todosInStorage.push(inputValue);
+    todosInStorage.push(todoObj);
     localStorage.setItem("todosInStorage", JSON.stringify(todosInStorage));
 }
 
@@ -126,18 +140,30 @@ function removeLocalTodos(todo){
     let todosInStorage = checkLocalStorage();
     // console.log(todo.children); -item,check,delete
     const todoIndex = todo.children[0].innerText;
-    todosInStorage.splice(todoIndex, 1);
+    todosInStorage.forEach(todo => {
+        if(todo.text === todoIndex)
+            todosInStorage.splice(todosInStorage.indexOf(todo), 1);
+    })
     localStorage.setItem("todosInStorage", JSON.stringify(todosInStorage));
 }
 
+function clearLocalTodo(todoText){
+    let todosInStorage = checkLocalStorage();
+    todosInStorage.forEach(todo => {
+        if(todo.text === todoText)
+            todosInStorage.splice(todosInStorage.indexOf(todo), 1);
+    })
+    localStorage.setItem("todosInStorage", JSON.stringify(todosInStorage));
+}
 function getTodosHandler(){
     let todosInStorage = checkLocalStorage();
+    console.log(todosInStorage);
     todosInStorage.forEach(function(todo) {
         const div = document.createElement("div");
         let li=document.createElement("li");
-        li.appendChild(document.createTextNode(todo));
+        li.appendChild(document.createTextNode(todo.text));
         li.innerHTML=`  
-                        <span class="todo-item">${todo}</span>
+                        <span class="todo-item">${todo.text}</span>
                         <button class="todo-delete"><i class="fa fa-trash-o"></i></button>
                         <button class="todo-check"><i class="fa fa-check-circle"></i></button>
                     `
@@ -145,5 +171,18 @@ function getTodosHandler(){
         div.appendChild(li)
         todoList.appendChild(div);
     })
-
+    checkComplete();
+}
+function checkComplete() {
+    let todosInStorage = checkLocalStorage();
+    todosInStorage.forEach(todoInArray => {
+                let todos = Array.from(document.querySelectorAll('.todo-list>div'));
+                //console.log(todos) //div's array
+                todos.forEach(todoss => {
+                let todo = todoss.querySelector('li');
+                let todoText = todo.querySelector('span').innerText;
+            if(todoText === todoInArray.text && todoInArray.checked === true){ 
+                    todo.classList.add("slash");
+                }}) 
+    })
 }
