@@ -70,6 +70,11 @@ form .todo-submit:hover{
     cursor: pointer;
 }
 
+.todo-container{
+    display: flex;
+    flex-direction: column;
+}
+
 .todo-list{
     margin-left: 3rem;
 }
@@ -131,6 +136,21 @@ li{
 .removeTransition{
     transform: translateX(20rem);
     opacity: 0.5;
+}
+
+.delete-btn{
+    align-self: center;
+    padding: 0.5rem 2rem;
+    border-radius: 0.75rem;
+    background:rgb(182, 33, 228);
+    color: white;
+    border: none;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+.delete-btn:hover {
+    color: rgb(182, 33, 228);
+    background: white;
 }
 /* pointer events none */
 .fa-trash-o, .fa-check-circle{

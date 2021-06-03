@@ -3,6 +3,7 @@ let todoInput = document.querySelector(".todo-input"); //alt + shift + down for 
 let todoSubmit = document.querySelector(".todo-submit");
 let todoList = document.querySelector(".todo-list");
 let filterTodos = document.querySelector(".filter-todos");
+let deleteAllBtn = document.querySelector(".delete-btn");
 let todoSave =[];
 
 //Event Listeners
@@ -17,6 +18,7 @@ filterTodos.addEventListener("change",() => {
         filterTodosHandler(filterTodos.value);
 });
 document.addEventListener("DOMContentLoaded",getTodosHandler);
+deleteAllBtn.addEventListener("click",deleteAllTodos);
 
 //Functions
 function addTodoHandler(event){
@@ -185,4 +187,19 @@ function checkComplete() {
                     todo.classList.add("slash");
                 }}) 
     })
+}
+
+function deleteAllTodos(e){
+    
+    let allTodosObj = e.target.parentElement.children[0].children;
+    let allTodos = Object.values(allTodosObj);
+    //console.log(allTodos[0].children[0]);
+    allTodos.forEach(todo => {
+        todo.children[0].classList.add("removeTransition");
+        todo.children[0].addEventListener("transitionend", e => {
+            todo.remove();
+            //console.log(todo)
+        });
+    })
+    localStorage.clear();
 }

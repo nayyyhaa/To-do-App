@@ -7,6 +7,7 @@ Organize your tasks with this To-do App which I've made.
 - mark the as completed
 - filter all, completed, uncompleted tasks
 - save the task in local storage
+- delete all todos
 
 This website is created using simple **VanillaJs, HTML & CSS**.
 
