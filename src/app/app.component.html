@@ -4,25 +4,25 @@
 </header>
 <main>
   <div class="form">
-        <input type="text" [(ngModel)]="todo" placeholder="input your to-dos" class="todo-input"/>
-        <button type="submit" class="todo-submit" (click)="addTodo(todo)">
+        <input type="text" [(ngModel)]="todoTitle" placeholder="input your to-dos" class="todo-input"/>
+        <button type="submit" class="todo-submit" (click)="addTodo(todoTitle)">
             <i class="fa fa-plus-circle fa-lg"></i>
         </button>
         <div class="select">
             <select name="selectTodos" class="filter-todos">
-                <option value="all">All Todos</option>
-                <option value="completed">Completed Todos</option>
-                <option value="uncompleted">Uncompleted Todos</option>
+                <option (click)="filterTodos('all')">All Todos</option>
+                <option (click)="filterTodos('completed')">Completed Todos</option>
+                <option (click)="filterTodos('uncompleted')">Uncompleted Todos</option>
             </select>
         </div>
     </div>
     <div class="todo-container">
         <ul class="todo-list" *ngIf="todos.length">
-            <div class="todo" *ngFor="let todo of todos">
+            <div class="todo" [ngClass]="{'slash': todo.isCompleted}" *ngFor="let todo of todos">
               <li>
-                <span class="todo-item">{{todo}}</span>
-                <button class="todo-delete"><i class="fa fa-trash-o"></i></button>
-                <button class="todo-check"><i class="fa fa-check-circle"></i></button>
+                <span class="todo-item">{{todo.name}}</span>
+                <button class="todo-delete" (click)="deleteTodo(todo)"><i class="fa fa-trash-o"></i></button>
+                <button class="todo-check" (click)="todo.isCompleted = !todo.isCompleted"><i class="fa fa-check-circle"></i></button>
               </li>
             </div>
         </ul>
